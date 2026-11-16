@@ -1,0 +1,60 @@
+*.log
+.DS_Store
+# Environment files carry live secrets (APP_KEY, DB credentials) and must
+# never be tracked again — commit 96aee676 shipped the local dev .env and
+# the audit confirmed the exposed key as live.
+/.env
+/.env.production
+/.env.backup
+/.env.*.backup
+.phpactor.json
+.phpunit.result.cache
+/.codex
+/.cursor/
+/.idea
+/.nova
+/.phpunit.cache
+/.vscode
+/.zed
+/auth.json
+# /node_modules    — committed (warning: native binaries are OS-specific,
+#                    Windows clones must run `npm rebuild` after pulling)
+# /public/build    — committed (compiled CSS/JS, OS-agnostic)
+/public/fonts-manifest.dev.json
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+# /vendor          — committed (PHP code, portable; run `composer dump-autoload`
+#                    after clone to refresh autoload paths)
+_ide_helper.php
+Homestead.json
+Homestead.yaml
+Thumbs.db
+
+# Project-specific
+# MySQL only: SQLite files and browser artifacts are never committed.
+*.sqlite
+*.sqlite-journal
+*.sqlite-shm
+*.sqlite-wal
+/public/uploads/*
+!/public/uploads/.gitkeep
+# Demo product images ship with the repo (clone-and-go)
+!/public/uploads/coffee/
+/storage/app/public/*
+!/storage/app/public/.gitkeep
+
+# macOS-only native binaries — local dev only, do not ship
+node_modules/@rolldown/binding-darwin-arm64/
+node_modules/@tailwindcss/oxide-darwin-arm64/
+node_modules/fsevents/
+node_modules/lightningcss-darwin-arm64/
+node_modules/nanoid/.claude/
+
+# Local agent/tool workspace (dynamic-workflow drafts, run logs) — never ship
+/.zcode/
+
+# Browser test artifacts
+/test-results/
+/playwright-report/

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Instant 3-in-1 Coffee 16 g × 20 Sticks">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f3623"/>
+      <stop offset="0.55" stop-color="#185034"/>
+      <stop offset="1" stop-color="#251812"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.78" cy="0.2" r="0.7">
+      <stop offset="0" stop-color="#c9a96e" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#c9a96e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect width="800" height="600" fill="url(#glow)"/>
+  <g opacity="0.14" stroke="#d8f3e0" stroke-width="1.5">
+    <path d="M-40 520 C 120 460 260 560 420 500 S 700 440 840 500" fill="none"/>
+    <path d="M-40 560 C 140 500 280 600 440 540 S 720 480 860 540" fill="none"/>
+    <path d="M-40 120 C 140 60 300 160 460 100 S 720 40 860 100" fill="none"/>
+  </g>
+  <g transform="translate(400 210)">
+    <g transform="rotate(-18)"><rect x="-34" y="-110" width="68" height="220" rx="16" fill="#c9a96e" fill-opacity="0.18" stroke="#c9a96e" stroke-width="7"/><path d="M-34 -70 h68 M-34 60 h68" stroke="#c9a96e" stroke-width="4" stroke-dasharray="8 6"/><text x="0" y="2" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#c9a96e">3in1</text></g>
+  </g>
+  <line x1="330" y1="322" x2="470" y2="322" stroke="#c9a96e" stroke-width="2"/>
+  <text x="400" y="378" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="34" fill="#faf7f2">Instant 3-in-1 Coffee</text>
+  <text x="400" y="420" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="34" fill="#faf7f2">16 g × 20 Sticks</text>
+  <text x="400" y="462" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" letter-spacing="4" fill="#c9a96e" style="text-transform:uppercase">OEM / ODM READY</text>
+  <text x="400" y="560" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" letter-spacing="2" fill="#faf7f2" opacity="0.55">AN DUONG ITI · VIETNAM COFFEE EXPORT</text>
+</svg>

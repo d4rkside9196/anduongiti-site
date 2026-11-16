@@ -1,0 +1,8 @@
+/* Self-hosted fonts via fontsource. This replaces the build-time bunny.net
+   fetch (vite.config.js fonts) and the runtime Google Fonts <link> in the
+   site layout: no third-party CDN participates in the build or in page
+   loads. Fontsource variable families carry the " Variable" suffix, which
+   app.css maps into the theme tokens below. */
+@import '@fontsource-variable/inter/wght.css';
+@import '@fontsource-variable/inter/wght-italic.css';
+@import '@fontsource-variable/fraunces/opsz.css';

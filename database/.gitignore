@@ -1,0 +1,5 @@
+# MySQL only: no SQLite database or write-ahead logs.
+*.sqlite
+*.sqlite-journal
+*.sqlite-shm
+*.sqlite-wal

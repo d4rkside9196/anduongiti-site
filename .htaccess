@@ -1,0 +1,63 @@
+# When Hostinger's document root points to the project root (the default
+# when you extract the release into ~/public_html/), this rewrite forwards
+# every request to public/index.php so Laravel's front controller handles
+# it. If you've already pointed the document root at /public/ in hPanel
+# you don't need this file — feel free to delete it.
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Refuse external requests that target Laravel internals AND deployment
+    # artifacts (backups/ from scripts/deploy.sh, .git/ from the clone
+    # upload option, docs/). Document root = project root means
+    # /database/README.md, /storage/logs/..., /backups/<stamp>.sql,
+    # /.git/config, /vendor/... are all reachable via URL — Hostinger's
+    # default rules deny .env/.json/.lock/.sql/.php but NOT .md or unknown
+    # types, so a request like /database/README.md leaks without this guard.
+    #
+    # Match THE_REQUEST (the literal HTTP request line) so the internal
+    # rewrite to public/$1 below doesn't trigger this rule on legitimate
+    # requests (the rewrite changes the URI but never touches THE_REQUEST).
+    RewriteCond %{THE_REQUEST} ^[A-Z]+\s/+(app|bootstrap|config|database|docs|lang|node_modules|resources|routes|scripts|storage|tests|vendor|backups|\.git|\.serena|\.zcode)(/|\sHTTP) [NC]
+    RewriteRule ^ - [R=404,L]
+    RewriteCond %{THE_REQUEST} ^[A-Z]+\s/+(artisan|composer\.(json|lock)|package(-lock)?\.json|phpunit\.xml|vite\.config\.js|README\.md|DEPLOY-HOSTINGER\.md|release\.zip)(\?|\sHTTP) [NC]
+    RewriteRule ^ - [R=404,L]
+
+    # Decode-safe duplicate of the guards above. THE_REQUEST is the raw,
+    # never-decoded request line, so a percent-encoded first segment such as
+    # /%64atabase/... escapes the literal match — while the per-directory
+    # rewrite below still resolves it to the real file. RewriteRule patterns
+    # in per-directory context match the percent-DECODED path, so encoding
+    # cannot slip past these rules.
+    RewriteRule "^(app|bootstrap|config|database|docs|lang|node_modules|resources|routes|scripts|storage|tests|vendor|backups|\.git|\.serena|\.zcode)(/|$)" - [R=404,L,NC]
+    RewriteRule "^(artisan|composer\.(json|lock)|package(-lock)?\.json|phpunit\.xml|vite\.config\.js|README\.md|DEPLOY-HOSTINGER\.md|release\.zip)$" - [R=404,L,NC]
+
+    # Don't rewrite for files that exist outside public/ (e.g. /robots.txt
+    # at the root, /storage symlinks the user maintains manually). Apache
+    # will serve them directly.
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [L]
+
+    # Send everything else into public/.
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Belt-and-suspenders: don't list directories if mod_rewrite is missing.
+<IfModule mod_autoindex.c>
+    Options -Indexes
+</IfModule>
+
+# Block direct access to dot-named FILES like .env, .htaccess (already the
+# Apache default but explicit doesn't hurt). NOTE: FilesMatch matches the
+# final path component only — it does NOT cover files inside a .git/
+# directory; the rewrite guards above handle that.
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# Database dumps, SQLite artifacts and git pack files must never be served
+# from anywhere under the document root, regardless of which directory the
+# deployment puts them in (backups/, .git/objects/pack/, ...).
+<FilesMatch "\.(sql|sqlite|sqlite3|db|pack|idx)$">
+    Require all denied
+</FilesMatch>

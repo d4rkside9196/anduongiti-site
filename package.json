@@ -1,0 +1,22 @@
+{
+    "$schema": "https://www.schemastore.org/package.json",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "vite build",
+        "dev": "vite",
+        "test:e2e": "BROWSER_DB_DATABASE=anduongiti_browser_e2e PLAYWRIGHT_OUTPUT_DIR=test-results/e2e playwright test --project=chromium --project=public-360 --project=public-768 --project=public-1024 --project=public-1440 --project=role-super_admin --project=role-catalog_manager --project=role-support",
+        "test:a11y": "BROWSER_DB_DATABASE=anduongiti_browser_a11y PLAYWRIGHT_OUTPUT_DIR=test-results/a11y playwright test --project=a11y"
+    },
+    "devDependencies": {
+        "@axe-core/playwright": "^4.14.0",
+        "@fontsource-variable/fraunces": "^5.3.0",
+        "@fontsource-variable/inter": "^5.3.0",
+        "@playwright/test": "^1.65.0",
+        "@tailwindcss/vite": "^4.0.0",
+        "concurrently": "^9.0.1",
+        "laravel-vite-plugin": "^3.1",
+        "tailwindcss": "^4.0.0",
+        "vite": "^8.0.0"
+    }
+}

@@ -1,0 +1,41 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # SEO: refuse external requests that include /public/ or /index.php
+    # in the URL. Match THE_REQUEST (the literal HTTP request line) so
+    # internal rewrites from the parent .htaccess don't trigger this rule
+    # — internal rewrites change REQUEST_URI / RewriteRule pattern but
+    # NEVER touch THE_REQUEST.
+    #
+    # Why this matters: project ships with document root = project root
+    # and the parent .htaccess rewrites /foo to public/foo internally.
+    # That means /foo, /public/foo, /index.php, and /public/index.php
+    # all serve the same content — Google treats them as duplicate
+    # pages and splits page authority across the dupes.
+    RewriteCond %{THE_REQUEST} ^[A-Z]+\s/+public(/|\sHTTP) [NC]
+    RewriteRule ^ - [R=404,L]
+    RewriteCond %{THE_REQUEST} ^[A-Z]+\s/+index\.php(\?|\sHTTP) [NC]
+    RewriteRule ^ - [R=404,L]
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Handle X-XSRF-Token Header
+    RewriteCond %{HTTP:x-xsrf-token} .
+    RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Arabica Cầu Đất Green Beans">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f3623"/>
+      <stop offset="0.55" stop-color="#185034"/>
+      <stop offset="1" stop-color="#251812"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.78" cy="0.2" r="0.7">
+      <stop offset="0" stop-color="#c9a96e" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#c9a96e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect width="800" height="600" fill="url(#glow)"/>
+  <g opacity="0.14" stroke="#d8f3e0" stroke-width="1.5">
+    <path d="M-40 520 C 120 460 260 560 420 500 S 700 440 840 500" fill="none"/>
+    <path d="M-40 560 C 140 500 280 600 440 540 S 720 480 860 540" fill="none"/>
+    <path d="M-40 120 C 140 60 300 160 460 100 S 720 40 860 100" fill="none"/>
+  </g>
+  <g transform="translate(400 210)">
+    <ellipse rx="62" ry="86" fill="#c9a96e"/><path d="M0 -86 C -26 -44 -26 44 0 86 C 26 44 26 -44 0 -86" fill="#185034"/><path d="M0 -86 C 9 -44 9 44 0 86" stroke="#0f3623" stroke-width="7" fill="none"/>
+  </g>
+  <line x1="330" y1="322" x2="470" y2="322" stroke="#c9a96e" stroke-width="2"/>
+  <text x="400" y="378" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="34" fill="#faf7f2">Arabica Cầu Đất</text>
+  <text x="400" y="420" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="34" fill="#faf7f2">Green Beans</text>
+  <text x="400" y="462" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" letter-spacing="4" fill="#c9a96e" style="text-transform:uppercase">WASHED · LAM DONG</text>
+  <text x="400" y="560" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" letter-spacing="2" fill="#faf7f2" opacity="0.55">AN DUONG ITI · VIETNAM COFFEE EXPORT</text>
+</svg>
