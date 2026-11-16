@@ -1,0 +1,32 @@
+# An Duong ITI docroot router: serves the Laravel app from lar/public
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteCond %{THE_REQUEST} ^[A-Z]+\s/+(app|bootstrap|config|database|docs|lang|node_modules|resources|routes|scripts|storage|tests|vendor|backups|\.git|\.serena|\.zcode)(/|\sHTTP) [NC]
+    RewriteRule ^ - [R=404,L]
+    RewriteCond %{THE_REQUEST} ^[A-Z]+\s/+(artisan|composer\.(json|lock)|package(-lock)?\.json|phpunit\.xml|vite\.config\.js|README\.md|READ-ME-FIRST\.txt|DEPLOY-HOSTINGER\.md|release\.zip|default\.php|\.env)(\?|\sHTTP) [NC]
+    RewriteRule ^ - [R=404,L]
+
+    RewriteRule "^(app|bootstrap|config|database|docs|lang|node_modules|resources|routes|scripts|storage|tests|vendor|backups|\.git|\.serena|\.zcode)(/|$)" - [R=404,L,NC]
+    RewriteRule "^(artisan|composer\.(json|lock)|package(-lock)?\.json|phpunit\.xml|vite\.config\.js|README\.md|READ-ME-FIRST\.txt|DEPLOY-HOSTINGER\.md|release\.zip|default\.php)$" - [R=404,L,NC]
+
+    RewriteCond %{REQUEST_URI} !^/lar/public/
+    RewriteRule ^lar/(.*)$ lar/public/$1 [L]
+
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [L]
+
+    RewriteRule ^(.*)$ lar/public/$1 [L]
+</IfModule>
+
+<IfModule mod_autoindex.c>
+    Options -Indexes
+</IfModule>
+
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "\.(sql|sqlite|sqlite3|db|pack|idx|gz|zip)$">
+    Require all denied
+</FilesMatch>
