@@ -40,7 +40,11 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            // FILESYSTEM_DISK_PUBLIC_ROOT lets hosts where symlink() is
+            // disabled (e.g. shared hosting) point the public disk straight
+            // at public/uploads — public/.htaccess then maps /storage/* to
+            // /uploads/*. Default stays the conventional symlinked path.
+            'root' => env('FILESYSTEM_DISK_PUBLIC_ROOT', storage_path('app/public')),
             'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/storage',
             'visibility' => 'public',
             'throw' => false,

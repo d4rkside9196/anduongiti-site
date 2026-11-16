@@ -29,6 +29,11 @@
     RewriteCond %{HTTP:x-xsrf-token} .
     RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
 
+    # Serve admin uploads without the /storage symlink (disabled on some
+    # shared hosts): FILESYSTEM_DISK_PUBLIC_ROOT points the public disk at
+    # public/uploads, so map /storage/* onto /uploads/*.
+    RewriteRule ^storage/(.*)$ uploads/$1 [L]
+
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
